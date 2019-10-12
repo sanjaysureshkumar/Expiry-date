@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for post in posts %}
+
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#"><b>User:</b> {{ post.author.username }}</a>
+              <small class="text-muted">Date Appended: {{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}"><b>Product:</b> {{ post.title }}</a></h2>
+            <p class="article-content"><b>Expiry Date:</b> {{ post.content.strftime('%Y-%m-%d')}}</p>
+            <p id="name" class="article-content"><b>Days To Expire:</b> {{ post.expiry }}</p>
+
+            <script type = "text/javascript">
+
+              var b = '{{ post.expiry }}';
+              var c = '{{ post.title }}'
+              var a= parseInt(b,10);
+
+                if( a <=10 && a>0 )
+                {
+                  alert ( c + ":This is an alert message ! Less than 10 Days to expire!!!");
+
+                }
+                if(a <=0)
+                {
+                  alert( c + ":Product Expired!!!Dont use Product anymore...");
+                  /*<button onclick="https://www.google.com/maps/place/Anna+University/@13.008295,80.2312783,17z/data=!3m1!4b1!4m5!3m4!1s0x3a52679e3f9a14bd:0x256803ee474a378b!8m2!3d13.008295!4d80.233467">See Nearby shops</button>
+
+                <a href="https://www.google.com/maps/place/Anna+University/@13.008295,80.2312783,17z/data=!3m1!4b1!4m5!3m4!1s0x3a52679e3f9a14bd:0x256803ee474a378b!8m2!3d13.008295!4d80.233467">Continue</a>
+  */
+                }
+
+
+            </script>
+           <div class="alert">
+              <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+              Just {{ post.expiry }} Days to Expire!!
+            </div>
+          </div>
+          <a href="https://www.google.com/maps/search/nearby+shops/@13.0124687,80.2360899,16z/data=!3m1!4b1">See Nearby Shops</a>
+
+
+
+
+        </article>
+        <style type="text/css">
+    body {
+        background-image: url("https://images.assetsdelivery.com/compings_v2/popovaphoto/popovaphoto1102/popovaphoto110200018.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /*background: #336699; */
+    }
+  </style>
+    {% endfor %}
+
+{% endblock content %}
